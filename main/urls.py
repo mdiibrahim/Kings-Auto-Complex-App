@@ -3,6 +3,13 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path("", views.index, name="home"),
+    path("profile/", views.profile, name="profile"),
+    path("job-cards/", views.job_card_list, name="job_card_list"),
+    path("services/", views.service_list, name="service_list"),
+    path("customers/", views.customer_list, name="customer_list"),
+    path("logout/", views.custom_logout, name="logout"),
+
     path("", views.index, name="index"),
     path("check_login", views.check_login, name="check_login"),
 

@@ -9,11 +9,29 @@ from .forms import SaleForm
 from django.contrib import messages
 from django.core.paginator import Paginator
 from . import globals
+from django.contrib.auth import logout
+
 from django.utils.dateparse import parse_date
 current_month = datetime.now().month
 current_year = datetime.now().year
 
+def custom_logout(request):
+    logout(request)
+    return redirect("home")
+def index(request):
+    return render(request, "main/index.html")
 
+def profile(request):
+    return render(request, "main/profile.html")
+
+def job_card_list(request):
+    return render(request, "main/job_card_list.html")
+
+def service_list(request):
+    return render(request, "main/service_list.html")
+
+def customer_list(request):
+    return render(request, "main/customer_list.html")
 def index(response):
     globals.is_logged_in = False
     return render(response, "main/base.html", {})

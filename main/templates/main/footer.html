@@ -1,58 +1,48 @@
 {% load static %}
 
 <link
-  href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
   rel="stylesheet"
   id="bootstrap-css"
 />
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Bootstrap Icons for Facebook and Gmail -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-<style>
-  html {
-    height: 100%;
-  }
-  body {
-    min-height: 100%;
-    padding: 0;
-    margin: 0;
-    position: relative;
-  }
+<!-- Footer Section -->
+<footer class="bg-dark text-white text-center py-4 mt-auto">
+  <div class="container d-flex justify-content-between align-items-center">
+    <!-- Left Side Content -->
+    <div class="footer-left d-flex flex-column align-items-start">
+      <img class="logo-image mb-3" src="{% static 'logo_zoom.jpg' %}" alt="Kings Auto Complex Logo" width="150" height="120" />
+      <h4 class="mb-3">Kings Auto Complex</h4>
+      <p class="mb-3 text-left">We offer a wide range of automobile services to keep your vehicle in top shape. Visit us for professional service and care.</p>
 
-  body::after {
-    content: "";
-    display: block;
-    height: 100px;
-  }
+      <!-- Contact Info -->
+      <p><strong>Phone:</strong> 01639-227150</p>
 
-  footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
-  }
+      <!-- Social Media Icons with Links -->
+      <div class="social-icons d-flex">
+        <a href="https://www.facebook.com/profile.php?id=100063477076152" target="_blank" class="facebook mr-3">
+          <i class="bi bi-facebook" style="font-size: 24px; color: #3b5998;"></i>
+        </a>
+        <a href="mailto:kingsauto@example.com" target="_blank" class="gmail">
+          <i class="bi bi-envelope" style="font-size: 24px; color: #ea4335;"></i>
+        </a>
+      </div>
+    </div>
 
-  /* FOR DEMO ONLY */
-  body {
-    font: bold arial;
-    text-align: center;
-  }
-
-  footer {
-    background: #000;
-    color: #fff;
-  }
-</style>
-<!------ Include the above in your HEAD tag ---------->
-
-<footer>
-  <a style="color: white" class="navbar-brand mx-auto" href="{% url 'sale' %}">
-    <img
-      src="{% static 'logo_zoom.jpg' %}"
-      alt="Logo"
-      class="logo-image"
-      style="width: 70px; height: 50px"
-    />
-    Kings Auto Complex</a
-  >
+    <!-- Right Side: Google Map -->
+    <div class="footer-right">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!3m2!1sen!2sbd!4v1761201169688!5m2!1sen!2sbd!6m8!1m7!1sK_RsNXb4ZYZSMwY5Sh5wug!2m2!1d22.35266025353221!2d91.78511713057493!3f101.90801661553921!4f-0.6176467643624051!5f0.7820865974627469"
+        width="500"
+        height="350"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
 </footer>
