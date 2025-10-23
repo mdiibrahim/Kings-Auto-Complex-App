@@ -128,13 +128,12 @@ def update_service(request, service_id):
 
 
 def delete_service(request, service_id):
-    if globals.is_logged_in:
+    if request.method == 'POST' and globals.is_logged_in:
         service = get_object_or_404(Service, service_id=service_id)
-
         service.delete()
+        return redirect('service_list')  # Or return a JSON response indicating success if you want AJAX
 
-        return redirect('service_list')
-
+    # If not authenticated, redirect to the index page
     return redirect("index")
 
 
