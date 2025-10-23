@@ -26,12 +26,15 @@
 
       /* Container for the main content */
       .container {
-        background-color: rgba(255, 255, 255, 0.8);
-        padding: 30px;
+        background-color: rgba(255, 255, 255, 0.7) !important;
+        padding: 50px;
         border-radius: 10px;
         margin-top: 100px;
         margin-bottom: 100px;
-        max-width: 90%;
+        max-width: 75% !important;
+
+  margin-left: auto; /* Center horizontally */
+  margin-right: auto; /* Center horizontally */
       }
 
       /* Table styling */
@@ -42,7 +45,7 @@
 
       /* Header Styling */
       .table th {
-        background-color: var(--primary-color);
+        background-color: var(--primary-color) !important;
       }
 
       .table td {
@@ -72,7 +75,7 @@
 
   <body>
     {% include 'main/navbar.html' %}
-    <br />
+
     <div class="container">
       <h1 class="text-center">Reports</h1>
       <br />
@@ -84,11 +87,11 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody class="text-left">
+        <tbody class="text-start">
           <tr>
             <td class="text-center fw-bold">Sale</td>
             <td>
-              <a class="btn btn-login" href="{% url 'sales_list' %}">Daily Sale</a>
+              <a class="btn btn-login " href="{% url 'sales_list' %}">Daily Sale</a>
               <a class="btn btn-login" href="{% url 'sales_list_month' %}">Monthly Sale</a>
                <a class="btn btn-login" href="{% url 'sales_list_previous' %}">Previous Month Sale</a>
                <a class="btn btn-login" href="{% url 'sales_list_all' %}">All Sale</a>
