@@ -6,68 +6,93 @@
   href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 />
 
-<!-- Include jQuery
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- Include Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <style>
-  .dropdown-menu {
-    display: none; /* Hide the dropdown menu by default */
+  /* Round logo */
+  .logo-image {
+    width: 100px;
+    height: 70px;
+    border-radius: 20%;
+    transition: transform 0.3s ease-in-out; /* Animation for logo hover */
   }
 
-  .nav-link:hover + .dropdown-menu,
-  .dropdown-menu:hover {
-    display: block; /* Display the dropdown menu when the link or the dropdown menu itself is hovered */
+  .logo-image:hover {
+    transform: scale(1.1); /* Scale up on hover */
+  }
+
+  /* Text styling for navbar links */
+  .nav-link {
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: capitalize; /* Ensure text is capitalized */
+    color: #f8f9fa !important;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  /* Navbar link hover effect */
+  .nav-link:hover {
+    color: #f39c12 !important; /* Change color on hover */
+    transform: translateX(5px); /* Add a slight slide effect */
+  }
+
+  /* Add hover effect to entire navbar */
+  .navbar-nav .nav-item {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .navbar-nav .nav-item:hover {
+    transform: translateY(-5px); /* Lift the item on hover */
   }
 </style>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <!-- Links -->
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item dropdown">
-      <a
-        class="nav-link dropdown-toggle"
-        href="#"
-        id="navbarDropdownMenuLink"
-        role="button"
-      >
-        Menu
-      </a>
-      <ul
-        id="dropdownMenu"
-        class="dropdown-menu"
-        aria-labelledby="navbarDropdownMenuLink"
-      >
-        <li><a class="dropdown-item" href="{% url 'stuff' %}">Stuff</a></li>
-        <li><a class="dropdown-item" href="{% url 'service' %}">Service</a></li>
-        <li><a class="dropdown-item" href="{% url 'item' %}">Item</a></li>
-        <li><a class="dropdown-item" href="{% url 'stock' %}">Stock</a></li>
-        <li><a class="dropdown-item" href="{% url 'sale' %}">Sale</a></li>
-        <li><a class="dropdown-item" href="{% url 'cost' %}">Cost</a></li>
-        <li><a class="dropdown-item" href="{% url 'salary' %}">Salary</a></li>
-        <li><a class="dropdown-item" href="{% url 'bill' %}">Bill</a></li>
-        <li>
-          <a class="dropdown-item" href="{% url 'job_card' %}">Job Card</a>
-        </li>
-      </ul>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'reports' %}">Report</a>
-    </li>
-  </ul>
-
-  <a class="navbar-brand mx-auto" href="{% url 'sale' %}">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <!-- Logo on the left side -->
+  <a class="navbar-brand" href="{% url 'sale' %}">
     <img
       src="{% static 'logo_zoom.jpg' %}"
       alt="Logo"
       class="logo-image"
-      style="width: 70px; height: 50px"
     />
-    Kings Auto Complex</a
-  >
 
+  </a>
+
+  <!-- Navbar items (list style, no dropdown) -->
+  <ul class="navbar-nav mx-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'stuff' %}">Stuff</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'service' %}">Service</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'item' %}">Item</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'stock' %}">Stock</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'sale' %}">Sale</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'cost' %}">Cost</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'salary' %}">Salary</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'bill' %}">Bill</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'job_card' %}">Job Card</a>
+    </li>
+  </ul>
+
+  <!-- Navbar items on the right (LogOut) -->
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
       <a class="nav-link" href="{% url 'index' %}">LogOut</a>
@@ -75,24 +100,13 @@
   </ul>
 </nav>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Custom Script for dropdown hover effect (if needed) -->
 <script>
-  var timeout;
-
   $(document).ready(function () {
-    $("#navbarDropdownMenuLink").mouseenter(function () {
-      clearTimeout(timeout);
-      $("#dropdownMenu").show();
-    });
-
-    $("#navbarDropdownMenuLink, #dropdownMenu").mouseleave(function () {
-      timeout = setTimeout(function () {
-        $("#dropdownMenu").hide();
-      }, 500);
-    });
-
-    $("#dropdownMenu").mouseenter(function () {
-      clearTimeout(timeout);
+    $(".nav-item").hover(function () {
+      $(this).children(".dropdown-menu").stop(true, true).fadeIn(300);
+    }, function () {
+      $(this).children(".dropdown-menu").stop(true, true).fadeOut(300);
     });
   });
 </script>
