@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,53 +6,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Previous Sales</title>
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
+    <!-- Include Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
     <style>
-      /* Excel-like font styles */
+      :root {
+        --primary-color: #eab11a;
+        --secondary-color: #f9d448;
+        --third-color: #f2f2f2;
+        --background-color: #000000;
+      }
+
+      /* Body styling with car background image */
       body {
-        font-family: Arial, sans-serif;
+        background: url('{% static "car_image.jpg" %}') no-repeat center center fixed;
+        background-size: cover;
       }
-      table th,
-      table td {
-        font-family: Arial, sans-serif;
-        font-size: 12px;
+
+      /* Container for the main content */
+      .container {
+        background-color: rgba(255, 255, 255, 0.8); /* Make background a little transparent */
+        padding: 50px;
+        border-radius: 10px;
+        margin-top: 10px;
+        margin-bottom: 50px;
+        max-width: 90% !important;
+        margin-left: auto;
+        margin-right: auto;
       }
-      /* Print styles */
-      @media print {
-        .actions,
-        .pagination,
-        .form-container,
-        .navbar,
-        .footer {
-          display: none !important;
-        }
-        .total-amount,
-        .container {
-          margin-left: 0;
-        }
-        .print-dates {
-          display: block !important;
-          text-align: center;
-          font-size: 14px;
-          margin-bottom: 20px;
-        }
+
+      /* Table styling */
+      table {
+        margin-top: 20px;
       }
-      .print-dates {
-        display: none;
+
+      /* Header Styling */
+      .table th {
+        background-color: var(--primary-color);
       }
+
+      tr td {
+        color: #333 !important;
+        font-weight: 500;
+      }
+
+      /* Button Container for Edit, Delete, and Search form */
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .btn-login {
+        background-color: var(--primary-color) !important;
+        color: #000;
+        font-weight: 700;
+        border-radius: 50px;
+        padding: 10px 20px;
+        text-decoration: none;
+        transition: background-color 0.3s, transform 0.3s ease;
+      }
+
+      .btn-login:hover {
+        background-color: var(--secondary-color) !important;
+        transform: scale(1.05);
+      }
+
+      /* Styling for search form and button */
+      .search-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .form-control {
+        max-width: 250px;
+      }
+
+      /* Adjusting input fields with labels above */
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+       /* Pagination Styling (Align to the bottom right) */
+      .pagination-container {
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .pagination a {
+        padding: 5px 10px;
+        background-color: var(--primary-color);
+        color: #000;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+      }
+
+      .pagination a:hover {
+        background-color: var(--secondary-color);
+      }
+
+      .current-page {
+        font-weight: bold;
+      }
+
+
+
+
+      /* Form Container for Date Range */
+      .form-container {
+        background-color: rgba(255, 255, 255, 0.8); /* Make background a little transparent */
+        padding: 30px;
+        border-radius: 10px;
+        margin: 10px;
+        max-width: 90% !important;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .form-row {
+        display: flex;
+        justify-content: space-around;
+        gap: 15px;
+      }
+
+      .form-group {
+        flex: 1;
+      }
+
+
+
     </style>
   </head>
+
   <body>
     {% include 'main/navbar.html' %}
     <br />
-    <div class="container form-container">
+    <div class="form-container">
       <form method="POST" action="{% url 'sales_list_previous' %}">
         {% csrf_token %}
         <div class="form-row">
@@ -78,7 +179,7 @@
             />
           </div>
           <div class="form-group col-md-2 align-self-end">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-login">
               Set Date Range
             </button>
           </div>
@@ -86,15 +187,14 @@
       </form>
     </div>
 
-    <div class="print-dates">
-      <strong>Date Range: {{ start_date }} - {{ end_date }}</strong>
-    </div>
-
     <br />
-    <div class="jumbotron container">
+    <div class="container">
+      <div class="print-dates text-center">
+        <strong>Date Range: {{ start_date }} - {{ end_date }}</strong>
+      </div>
       <h3 class="text-center">Sales - {{ start_date }} - {{ end_date }}</h3>
-      <table class="table table-bordered">
-        <thead>
+      <table class="table table-bordered text-center">
+        <thead style="background-color: var(--primary-color);">
           <tr>
             <th>Memo</th>
             <th>Sale ID</th>
@@ -115,12 +215,17 @@
             <td>{{ sale.stuff.stuff_name }}</td>
             <td>{{ sale.sale_total }}</td>
             <td class="actions">
-              <a
-                href="{% url 'delete_sale' sale.sale_id %}"
-                class="btn btn-danger"
-                >Delete</a
-              >
-            </td>
+  <button
+    type="button"
+    class="btn btn-danger"
+    data-bs-toggle="modal"
+    data-bs-target="#deleteModal"
+    data-id="{{ sale.sale_id }}"
+  >
+    Delete
+  </button>
+</td>
+
           </tr>
           {% endfor %}
         </tbody>
@@ -129,26 +234,40 @@
         <span><strong>Total: {{ total_amount }}</strong></span>
       </div>
 
-      <div class="pagination">
+      <div class="pagination-container">
         <!-- Previous button -->
         {% if sales.has_previous %}
         <a href="?page={{ sales.previous_page_number }}">Previous</a>
         {% endif %}
 
+
+      <!-- Pagination -->
+      <div class="pagination-container">
+        <!-- Previous button -->
+        {% if costs.has_previous %}
+        <a href="?page={{ costs.previous_page_number }}">Previous</a>
+        {% endif %}
+
         <!-- Page navigation form -->
-        <div class="page-navigation">
-          <form action="{% url 'sales_list_previous' %}" method="GET">
-            <input
-              type="number"
-              name="page"
-              min="1"
-              max="{{ sales.paginator.num_pages }}"
-              value="{{ sales.number }}"
-              class="page-input"
-            />
-            <button type="submit" class="page-button">Go</button>
-          </form>
-        </div>
+        <form action="{% url 'costs_list_month' %}" method="GET">
+          <input
+            type="number"
+            name="page"
+            min="1"
+            max="{{ costs.paginator.num_pages }}"
+            value="{{ costs.number }}"
+            class="page-input"
+          />
+          <button type="submit" class="page-button btn btn-login">Go</button>
+        </form>
+
+
+
+        <!-- Next button -->
+        {% if costs.has_next %}
+        <a href="?page={{ costs.next_page_number }}">Next</a>
+        {% endif %}
+      </div>
 
         <!-- Current page information -->
         <span style="margin-right: 3%; margin-left: 3%" class="current-page">
@@ -161,7 +280,44 @@
         {% endif %}
       </div>
     </div>
+ <!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this sale? This action cannot be undone.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <form id="deleteForm" action="" method="POST" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
     {% include 'main/footer.html' %}
+
+    <!-- Bootstrap 5 JS (No jQuery required) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // When the modal is shown, update the form action dynamically with the correct sale ID
+  var deleteModal = document.getElementById('deleteModal');
+  deleteModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget; // Button that triggered the modal
+    var saleId = button.getAttribute('data-id'); // Extract sale ID from the data-id attribute
+    var url = "{% url 'delete_sale' sale_id=0 %}".replace('0', saleId); // Replace placeholder with actual sale ID
+    var form = document.getElementById('deleteForm');
+    form.setAttribute('action', url); // Set the action URL for the form
+  });
+</script>
+
   </body>
-  
 </html>

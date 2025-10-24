@@ -478,7 +478,7 @@ def sales_list(request):
         page_number = request.GET.get('page')
         new_sales = paginator.get_page(page_number)
 
-        return render(request, 'main/sales-list.html', {'sales': new_sales, 'enc': enc, 'paginator': paginator})
+        return render(request, 'main/sales-list.html', {'sales': new_sales, 'current_date': current_date, 'enc': enc, 'paginator': paginator})
 
     return redirect("index")
 
@@ -603,7 +603,8 @@ def sales_list_all(request):
         page_number = request.GET.get('page')
         new_sales = paginator.get_page(page_number)
 
-        return render(request, 'main/sales-list.html', {'sales': new_sales, 'enc': enc, 'paginator': paginator})
+        return render(request,
+                      'main/sales-list.html', {'sales': new_sales, 'enc': enc,  'paginator': paginator})
 
     return redirect("index")
 
