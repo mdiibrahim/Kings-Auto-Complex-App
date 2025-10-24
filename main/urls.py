@@ -128,8 +128,7 @@ urlpatterns = [
     path('view_jobcard/<int:order_id>', views.view_jobcard, name='view_jobcard'),
     path('search_jobcard/',
          views.search_jobcard, name='search_jobcard'),
-    path('delete_jobcard/<int:order_id>',
-         views.delete_jobcard, name='delete_jobcard'),
+    path('delete_jobcard/<int:order_id>/', views.delete_jobcard, name='delete_jobcard'),
 
     path('monthly-statement/', views.monthly_statement, name='monthly_statement'),
     path('month-to-month-statement/', views.month_to_month_statement,
