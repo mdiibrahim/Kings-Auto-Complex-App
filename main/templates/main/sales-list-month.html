@@ -1,35 +1,139 @@
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sales</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+     <!-- Include Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
     <style>
+      :root {
+        --primary-color: #eab11a;
+        --secondary-color: #f9d448;
+        --third-color: #f2f2f2;
+        --background-color: #000000;
+      }
+
+      /* Body styling with car background image */
       body {
-        font-family: Arial, sans-serif;
+        background: url('{% static "car_image.jpg" %}') no-repeat center center fixed;
+        background-size: cover;
       }
-      table th,
-      table td {
-        font-family: Arial, sans-serif;
-        font-size: 12px;
+
+      /* Container for the main content */
+      .container {
+        background-color: rgba(255, 255, 255, 0.8); /* Make background a little transparent */
+        padding: 50px;
+        border-radius: 10px;
+        margin-top: 10px;
+        margin-bottom: 50px;
+        max-width:   75% !important;
+        margin-left: auto;
+        margin-right: auto;
       }
+
+      /* Table styling */
+      table {
+        margin-top: 20px;
+
+      }
+
+      /* Header Styling */
+      .table th {
+        background-color: var(--primary-color);
+      }
+      .table thead {
+            background-color: var(--primary-color);
+
+      }
+
+      tr td {
+        color: #333 !important;
+        font-weight: 500;
+      }
+
+      /* Button Container for Edit, Delete, and Search form */
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .btn-login {
+        background-color: var(--primary-color) !important;
+        color: #000;
+        font-weight: 700;
+        border-radius: 50px;
+        padding: 10px 20px;
+        text-decoration: none;
+        transition: background-color 0.3s, transform 0.3s ease;
+      }
+
+      .btn-login:hover {
+        background-color: var(--secondary-color) !important;
+        transform: scale(1.05);
+      }
+
+      /* Styling for search form and button */
+      .search-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .form-control {
+        max-width: 250px;
+      }
+
+      /* Adjusting input fields with labels above */
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+
+      /* Form Container for Date Range */
+      .form-container {
+        background-color: rgba(255, 255, 255, 0.8); /* Make background a little transparent */
+        padding: 30px;
+        border-radius: 10px;
+        margin: 10px;
+        max-width:   75% !important;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .form-row {
+        display: flex;
+        justify-content: space-around;
+        gap: 15px;
+      }
+
+      .form-group {
+        flex: 1;
+      }
+
+
+
     </style>
   </head>
 
   <body>
     {% include 'main/navbar.html' %}
-    <br />
-    <div class="jumbotron container">
-      <h3 class="text-center">Sales - {{ month }}</h3>
+ 
+    <div class=" ">
+      <h3 class="text-xl-center text-white my-2 fs-1">Sales - {{ month }}</h3>
 
-      <div class="container form-container">
+      <div class=" form-container">
         <form method="POST" action="">
           {% csrf_token %}
           <div class="form-row">
@@ -56,7 +160,7 @@
               />
             </div>
             <div class="form-group col-md-2 align-self-end">
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" class="btn btn-login">
                 Set Date Range
               </button>
             </div>
@@ -64,12 +168,11 @@
         </form>
       </div>
 
-      <br />
-
+   
       {% if sales %} {% for sale in sales %} {% if sale.1 %}
-      <div style="border: 1px solid black" class="container">
+      <div style="border: 1px solid black" class="container text-center">
         <h2>{{ sale.0 }}</h2>
-        <table class="table table-bordered">
+        <table class="table table-bordered ">
           <thead>
             <tr>
               <th>Date</th>
@@ -93,30 +196,33 @@
             </tr>
           </tbody>
         </table>
-        <br />
+         
       </div>
 
       {% if forloop.last %}
       <!-- Check if it's the last iteration -->
-      <div class="grand-total">
+      <div class="grand-total fs-1 text-white text-xl-center my-4">
         <strong>Grand Total: {{ grand_total }}</strong>
       </div>
       {% endif %} {% if sale.1.has_other_pages %}
-      <div class="pagination">
-        <span class="step-links">
-          {% if sale.1.has_previous %}
-          <a href="?page={{ sale.1.previous_page_number }}">&laquo; first</a>
-          <a href="?page={{ sale.1.previous_page_number }}">previous</a>
-          {% endif %}
+      <!-- Pagination -->
+<div class="pagination-container d-flex justify-content-center align-items-center my-3">
+  {% if sale.1.has_previous %}
+    <a href="?page={{ sale.1.previous_page_number }}" class="btn btn-login mx-1">&laquo; First</a>
+    <a href="?page={{ sale.1.previous_page_number }}" class="btn btn-login mx-1">Previous</a>
+  {% endif %}
 
-          <span class="current-page">{{ sale.1.number }}</span>
+  <!-- Display the current page number -->
+  <span class="current-page mx-2 py-1 px-3 border rounded bg-light text-dark font-weight-bold">
+    Page {{ sale.1.number }} of {{ sale.1.paginator.num_pages }}
+  </span>
 
-          {% if sale.1.has_next %}
-          <a href="?page={{ sale.1.next_page_number }}">next</a>
-          <a href="?page={{ sale.1.paginator.num_pages }}">last &raquo;</a>
-          {% endif %}
-        </span>
-      </div>
+  {% if sale.1.has_next %}
+    <a href="?page={{ sale.1.next_page_number }}" class="btn btn-login mx-1">Next</a>
+    <a href="?page={{ sale.1.paginator.num_pages }}" class="btn btn-login mx-1">Last &raquo;</a>
+  {% endif %}
+</div>
+
       {% endif %} {% else %}
       <p>No sales data available for this service.</p>
       {% endif %} {% endfor %} {% else %}
@@ -124,5 +230,7 @@
       {% endif %}
     </div>
     {% include 'main/footer.html' %}
+      <!-- Bootstrap 5 JS (No jQuery required) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
