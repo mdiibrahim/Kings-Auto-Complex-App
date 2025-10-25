@@ -1,56 +1,93 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Service</title>
+    <title>Create Service</title>
+<!-- Include Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      :root {
+        --primary-color: #eab11a;
+        --secondary-color: #f9d448;
+        --third-color: #f2f2f2;
+        --background-color: #000000;
+      }
+
+      /* Body styling with car background image */
+      body {
+        background: url('{% static "car_image.jpg" %}') no-repeat center center fixed;
+        background-size: cover; /* Ensure the image covers the entire background */
+      }
+
+      /* Container for the main content */
+      .container {
+        background-color: rgba(255, 255, 255, 0.8); /* Make background a little transparent */
+        padding: 60px;
+        border-radius: 10px;
+        margin-top: 100px; /* Add some top margin */
+        margin-bottom: 100px; /* Add some bottom margin */
+        max-width: 75% !important;
+
+        margin-left: auto; /* Center horizontally */
+        margin-right: auto; /* Center horizontally */
+      }
+
+
+      .btn-login {
+        background-color: var(--primary-color) !important; /* Primary color as default */
+        color: #000;
+        font-weight: 700;
+        border-radius: 50px;
+        padding: 15px;
+        transition: background-color 0.3s, transform 0.3s ease;
+      }
+
+      .btn-login:hover {
+        background-color: var(--secondary-color) !important; /* Secondary color on hover */
+        transform: scale(1.05);
+      }
+
+
+    </style>
   </head>
 
   <body>
     {% include 'main/navbar.html' %}
-    <br />
-    <div class="jumbotron container">
-      <h3 class="text-center">Edit Service</h3>
+
+    <div class=" container">
+      <h3 class="text-center mb-5">Edit Service</h3>
       <form
         action="{% url 'update_service' service.service_id %}"
-        method="POST"
+        method="POST" class="px-5"
       >
         {% csrf_token %}
-        <div class="form-group">
-          <input
-            required
-            class="form-control"
-            placeholder="Service Name:"
-            type="text"
-            id="service_name"
-            name="service_name"
-            value="{{service.service_name}}"
-          />
-          <br />
 
-          <input
-            required
-            class="form-control"
-            placeholder="Service Charge:"
-            type="number"
-            id="service_charge"
-            name="service_charge"
-            value="{{service.service_charge}}"
-          />
-          <br />
+          <div id="item-container">
+          <div class="row item-row ">
+            <div class="col-md-5">
+              <label for="service_name">Service Name:</label>
+              <input required class="form-control" placeholder="Service Name" type="text" name="service_name" value="{{service.service_name}}" />
+            </div>
+
+            <div class="col-md-5">
+              <label for="service_charge">Service Charge:</label>
+              <input required  value="{{service.service_charge}}" class="form-control" placeholder="Service Charge" type="number" name="service_charge" />
+            </div>
+              <div class="col-md-2">
+              <input type="submit" value="Submit" class="btn btn-login mt-4" />
+            </div>
+
+          </div>
         </div>
 
-        <input type="submit" value="Submit" class="btn btn-primary" />
       </form>
     </div>
     {% include 'main/footer.html' %}
+   <!-- Bootstrap 5 JS (No jQuery required) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
   </body>
 </html>

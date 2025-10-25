@@ -84,7 +84,7 @@
     {% include 'main/navbar.html' %}
     <div class="container">
       <h3 class="text-center mb-3">Edit Stuff</h3>
-      <form action="{% url 'update_stuff' stuff.stuff_id %}" method="POST">
+      <form action="{% url 'update_stuff' stuff.stuff_id %}" method="POST" class="px-3">
         {% csrf_token %}
         <div class="row my-2">
           <!-- First Column (Join Date) -->

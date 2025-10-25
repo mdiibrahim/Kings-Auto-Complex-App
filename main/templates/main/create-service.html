@@ -56,13 +56,14 @@
 
   <body>
     {% include 'main/navbar.html' %}
-    <br />
+
     <div
       class=" container"
     >
       <h3 class="text-center mb-5">Create Service</h3>
       <form action="{% url 'create_service' %}" method="POST" class="px-5">
         {% csrf_token %}
+
         <div id="item-container">
           <div class="row item-row ">
             <div class="col-md-5">
