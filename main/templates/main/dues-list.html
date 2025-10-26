@@ -104,19 +104,19 @@
     {% include 'main/navbar.html' %}
 
     <div class="container text-center">
-      <h3>Due Sales</h3>
+      <h3 class="mb-3">Due Sales</h3>
 
       <!-- Search form -->
       <form class="search-form" method="get" action="{% url 'dues_list' %}">
         <input
-          class="form-control"
+          class="form-control mt-3"
           type="search"
           placeholder="Search by car name or mobile number"
           aria-label="Search"
           name="q"
           value="{{ query }}"
         />
-        <button class="btn btn-login" type="submit">Search</button>
+        <button class="btn btn-login mb-1" type="submit">Search</button>
       </form>
 
       <br />
