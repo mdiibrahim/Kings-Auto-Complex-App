@@ -87,55 +87,55 @@
     <form id="dynamic-form" action="{% url 'create_cost' %}" method="POST" class="px-3">
         {% csrf_token %}
         <div class="d-flex rounded justify-content-between align-items-center my-4 flex-wrap fixed-header">
-    <h2 class="mb-0">Cost</h2>
-    <div class="my-1">
-        <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap">
-            <button
-                    type="button"
-                    id="add-btn"
-                    name="add-btn"
-                    class="btn btn-outline-success"
-                    onclick="addRow()"
-            >
-                Add Row
-            </button>
+            <h2 class="mb-0">Cost</h2>
+            <div class="my-1">
+                <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap">
+                    <button
+                            type="button"
+                            id="add-btn"
+                            name="add-btn"
+                            class="btn btn-outline-success"
+                            onclick="addRow()"
+                    >
+                        Add Row
+                    </button>
 
-            <label for="grand-total" class="col-form-label mb-0">Grand Total:</label>
+                    <label for="grand-total" class="col-form-label mb-0">Grand Total:</label>
 
-            <input
-                    type="text"
-                    id="grand-total"
-                    class="form-control text-center"
-                    style="width: 150px;"
-                    readonly
-            />
+                    <input
+                            type="text"
+                            id="grand-total"
+                            class="form-control text-center"
+                            style="width: 150px;"
+                            readonly
+                    />
 
-            <button
-  id="confirm-button"
-  name="confirm-button"
-  type="button"
-  class="btn btn-login"
-  data-bs-toggle="modal"
-  data-bs-target="#confirmModal"
->
-  Confirm
-</button>
+                    <button
+                            id="confirm-button"
+                            name="confirm-button"
+                            type="button"
+                            class="btn btn-login"
+                            data-bs-toggle="modal"
+                            data-bs-target="#confirmModal"
+                    >
+                        Confirm
+                    </button>
 
+                </div>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <label for="cost_date" class="col-form-label mb-0">Cost Date:</label>
+                <input
+                        required
+                        type="date"
+                        id="cost_date"
+                        name="cost_date"
+                        class="form-control"
+                        style="width: 200px;"
+                        value=""
+                />
+            </div>
         </div>
-    </div>
-    <div class="d-flex align-items-center gap-2">
-        <label for="cost_date" class="col-form-label mb-0">Cost Date:</label>
-        <input
-                required
-                type="date"
-                id="cost_date"
-                name="cost_date"
-                class="form-control"
-                style="width: 200px;"
-                value=""
-        />
-    </div>
-</div>
 
 
         <div class="container-fluid p-3">
@@ -187,21 +187,21 @@
 </div>
 <!-- Confirm Submission Modal -->
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmModalLabel">Confirm Submission</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to submit the cost details? This action cannot be undone.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-login" id="confirmSubmitBtn">Confirm</button>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Confirm Submission</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to submit the cost details? This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-login" id="confirmSubmitBtn">Confirm</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 {% include 'main/footer.html' %}
@@ -210,146 +210,174 @@
 
 <script>
 
-   document.addEventListener("DOMContentLoaded", function () {
-    const today = new Date().toISOString().split("T")[0];
-    const el = document.getElementById("cost_date");
-    if (el && !el.value) el.value = today; // Set today's date if cost_date is empty
-});
+    document.addEventListener("DOMContentLoaded", function () {
+     const today = new Date().toISOString().split("T")[0];
+     const el = document.getElementById("cost_date");
+     if (el && !el.value) el.value = today; // Set today's date if cost_date is empty
+ });
 
-// Flag to indicate if the form has unsaved changes
-let isFormDirty = false;
+ // Flag to indicate if the form has unsaved changes
+ let isFormDirty = false;
 
-// Function to set the form as dirty if any input has a value
-function setFormDirty() {
-    isFormDirty = true;
-}
+ // Function to set the form as dirty if any input has a value
+ function setFormDirty() {
+     isFormDirty = true;
+ }
 
-// Add event listeners to existing inputs and selects
-function addListenersToInputs(inputs) {
-    inputs.forEach((input) => {
-        input.addEventListener("input", setFormDirty);
-        input.addEventListener("change", setFormDirty);
-    });
-}
+// Add event listener for form submission
+document.getElementById("dynamic-form").addEventListener("submit", validateRequiredFields);
 
-// Initialize listeners for existing form inputs
-const formInputs = document.querySelectorAll("#dynamic-form input, #dynamic-form select");
-addListenersToInputs(formInputs);
+ // Add event listeners to existing inputs and selects
+ function addListenersToInputs(inputs) {
+     inputs.forEach((input) => {
+         input.addEventListener("input", setFormDirty);
+         input.addEventListener("change", setFormDirty);
+     });
+ }
 
-// Add event listener for the beforeunload event to display a confirmation dialog if form is dirty
-window.addEventListener("beforeunload", (e) => {
-    if (isFormDirty) {
-        const confirmationMessage =
-            "You have unsaved changes. Are you sure you want to leave?";
-        e.returnValue = confirmationMessage; // For cross-browser compatibility
-        return confirmationMessage;
-    }
-});
+ // Initialize listeners for existing form inputs
+ const formInputs = document.querySelectorAll("#dynamic-form input, #dynamic-form select");
+ addListenersToInputs(formInputs);
 
-// Reset the flag when the form is successfully submitted
-document.getElementById("dynamic-form").addEventListener("submit", () => {
-    isFormDirty = false; // This prevents the warning after submission
-});
+ // Add event listener for the beforeunload event to display a confirmation dialog if form is dirty
+ window.addEventListener("beforeunload", (e) => {
+     if (isFormDirty) {
+         const confirmationMessage =
+             "You have unsaved changes. Are you sure you want to leave?";
+         e.returnValue = confirmationMessage; // For cross-browser compatibility
+         return confirmationMessage;
+     }
+ });
 
-function calculateTotal(selectElement) {
-    var total = 0;
-    var row = selectElement.parentNode;
-    var row_amt = parseFloat(row.querySelector('input[type="number"]').value);
-    total += row_amt;
+ // Reset the flag when the form is successfully submitted
+ document.getElementById("dynamic-form").addEventListener("submit", () => {
+     isFormDirty = false; // This prevents the warning after submission
+ });
 
-    calculateGrandTotal();
-}
+ function calculateTotal(selectElement) {
+     var total = 0;
+     var row = selectElement.parentNode;
+     var row_amt = parseFloat(row.querySelector('input[type="number"]').value);
+     total += row_amt;
 
-function calculateGrandTotal() {
-    var totalInputs = document.querySelectorAll('input[name^="total"]');
-    var grandTotal = 0;
+     calculateGrandTotal();
+ }
 
-    totalInputs.forEach(function (input) {
-        var totalValue = parseFloat(input.value);
-        if (!isNaN(totalValue)) {
-            grandTotal += totalValue;
+ function calculateGrandTotal() {
+     var totalInputs = document.querySelectorAll('input[name^="total"]');
+     var grandTotal = 0;
+
+     totalInputs.forEach(function (input) {
+         var totalValue = parseFloat(input.value);
+         if (!isNaN(totalValue)) {
+             grandTotal += totalValue;
+         }
+     });
+
+     var grandTotalInput = document.getElementById("grand-total");
+     if (!grandTotalInput) {
+         // Create the grand total input field if it doesn't exist
+         grandTotalInput = document.createElement("input");
+         grandTotalInput.type = "text";
+         grandTotalInput.id = "grand-total";
+         grandTotalInput.readonly = true;
+
+         // Find the "Add Row" button
+         var addButton = document.getElementById("add-btn");
+
+         // Get the parent container of the "Add Row" button
+         var parentContainer = addButton.parentNode;
+
+         // Create a new div element for the grand total input field and its label
+         var grandTotalDiv = document.createElement("div");
+         grandTotalDiv.classList.add("column");
+
+         // Create a label for the grand total input field
+         var grandTotalLabel = document.createElement("label");
+         grandTotalLabel.textContent = "Grand Total: ";
+
+         // Append the label and input field to the div
+         grandTotalDiv.appendChild(grandTotalLabel);
+         grandTotalDiv.appendChild(grandTotalInput);
+
+         // Insert the div after the "Add Row" button
+         parentContainer.insertBefore(grandTotalDiv, addButton.nextSibling);
+     }
+
+     grandTotalInput.value = grandTotal.toFixed(2);
+ }
+
+
+
+ // Update the serial numbers of the rows
+ function updateSerials() {
+     document.querySelectorAll("#dynamic-rows .serial").forEach((el, i) => {
+         el.textContent = i + 1;
+     });
+ }
+
+ // Add a new row dynamically to the form
+ function addRow() {
+     const container = document.getElementById("dynamic-rows");
+     const count = container.querySelectorAll(".form-group.row.align-items-center").length + 1;
+
+     const newRow = document.createElement("div");
+     newRow.className = "form-group row align-items-center mb-2";
+     newRow.innerHTML = `
+         <div class="col-sm-1 text-center"><span class="serial">${count}</span></div>
+         <div class="col-sm-5">
+             <input type="text" name="cost_name[]" placeholder="Cost Name" class="form-control"/>
+         </div>
+         <div class="col-sm-3">
+             <input required type="number" name="total[]" placeholder="Total" oninput="calculateTotal(this)" class="form-control"/>
+         </div>
+         <div class="col-sm-3 text-center">
+             <span class="btn btn-danger" onclick="removeRow(this)">Remove</span>
+         </div>
+     `;
+     container.appendChild(newRow);
+     updateSerials(); // Update serial numbers after adding a new row
+ }
+
+ // Remove a row from the form
+ function removeRow(btn) {
+     const row = btn.closest(".form-group.row.align-items-center");
+     row.remove();
+     updateSerials(); // Update serial numbers after removing a row
+     calculateGrandTotal();
+ }
+// Function to validate required fields before submission
+function validateRequiredFields() {
+    let isValid = true;
+
+    // Select all required input fields
+    const requiredFields = document.querySelectorAll('input[required], select[required]');
+
+    // Loop through each required field and check if it's empty
+    requiredFields.forEach(function(field) {
+        if (!field.value) {
+            field.style.borderColor = "red";  // Highlight empty field with red border
+            isValid = false;
+        } else {
+            field.style.borderColor = "";  // Reset border color
         }
     });
 
-    var grandTotalInput = document.getElementById("grand-total");
-    if (!grandTotalInput) {
-        // Create the grand total input field if it doesn't exist
-        grandTotalInput = document.createElement("input");
-        grandTotalInput.type = "text";
-        grandTotalInput.id = "grand-total";
-        grandTotalInput.readonly = true;
-
-        // Find the "Add Row" button
-        var addButton = document.getElementById("add-btn");
-
-        // Get the parent container of the "Add Row" button
-        var parentContainer = addButton.parentNode;
-
-        // Create a new div element for the grand total input field and its label
-        var grandTotalDiv = document.createElement("div");
-        grandTotalDiv.classList.add("column");
-
-        // Create a label for the grand total input field
-        var grandTotalLabel = document.createElement("label");
-        grandTotalLabel.textContent = "Grand Total: ";
-
-        // Append the label and input field to the div
-        grandTotalDiv.appendChild(grandTotalLabel);
-        grandTotalDiv.appendChild(grandTotalInput);
-
-        // Insert the div after the "Add Row" button
-        parentContainer.insertBefore(grandTotalDiv, addButton.nextSibling);
-    }
-
-    grandTotalInput.value = grandTotal.toFixed(2);
+    // If any required field is empty, return false to prevent submission
+    return isValid;
 }
 
-// Function to confirm and submit the form after modal confirmation
+// Attach the validation function to the "Confirm" button click event
 document.getElementById("confirmSubmitBtn").addEventListener("click", function () {
-    // Set the flag to false after confirmation, preventing "unsaved changes" warning
-    isFormDirty = false;
-
-    // Submit the form after confirmation
-    document.getElementById("dynamic-form").submit();
+    if (validateRequiredFields()) {
+        // If all required fields are filled, submit the form
+        isFormDirty = false;
+        document.getElementById("dynamic-form").submit();
+    } else {
+        // If there are empty required fields, display an alert
+        alert("Please fill in all required fields before confirming.");
+    }
 });
-
-// Update the serial numbers of the rows
-function updateSerials() {
-    document.querySelectorAll("#dynamic-rows .serial").forEach((el, i) => {
-        el.textContent = i + 1;
-    });
-}
-
-// Add a new row dynamically to the form
-function addRow() {
-    const container = document.getElementById("dynamic-rows");
-    const count = container.querySelectorAll(".form-group.row.align-items-center").length + 1;
-
-    const newRow = document.createElement("div");
-    newRow.className = "form-group row align-items-center mb-2";
-    newRow.innerHTML = `
-        <div class="col-sm-1 text-center"><span class="serial">${count}</span></div>
-        <div class="col-sm-5">
-            <input type="text" name="cost_name[]" placeholder="Cost Name" class="form-control"/>
-        </div>
-        <div class="col-sm-3">
-            <input required type="number" name="total[]" placeholder="Total" oninput="calculateTotal(this)" class="form-control"/>
-        </div>
-        <div class="col-sm-3 text-center">
-            <span class="btn btn-danger" onclick="removeRow(this)">Remove</span>
-        </div>
-    `;
-    container.appendChild(newRow);
-    updateSerials(); // Update serial numbers after adding a new row
-}
-
-// Remove a row from the form
-function removeRow(btn) {
-    const row = btn.closest(".form-group.row.align-items-center");
-    row.remove();
-    updateSerials(); // Update serial numbers after removing a row
-    calculateGrandTotal();
-}
 
 </script>
 </body>
