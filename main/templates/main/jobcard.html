@@ -67,18 +67,66 @@
         background-color: var(--primary-color) !important;
         }
         /* Adjust layout for printing */
-      @media print {
-        .container {
-          margin: 0%;
-          padding: 0;
-        }
-        .alias-ninja {
-          margin-bottom: 25rem;
-        }
-        .row {
-          display: flex;
-          flex-wrap: wrap;
-        }
+@media print {
+  /* Remove the background image when printing */
+  body {
+    background-color: white !important;
+    background-image: none !important;
+    margin: 0 !important; /* Remove margins */
+    padding: 0 !important; /* Remove padding */
+    width: 100% !important;
+  }
+
+  /* Ensure container is properly centered and stretches correctly */
+  .container {
+    margin: 0 !important; /* Remove all margins */
+    padding: 15px !important; /* Remove all padding */
+    top: 0;
+    position: relative;
+    max-width: 100% !important;
+
+  }
+
+  /* Hide the print button */
+  .print-btn, .navbar-wrapper {
+    display: none !important; /* Hide the print button */
+  }
+
+
+
+  /* Ensure footer takes full width and sticks at the bottom of the last page */
+  footer {
+    width: 100% !important;
+    padding: 15px !important;
+    margin: 0 !important;
+    position: relative; /* Make sure it's positioned relative to the page */
+    bottom: 0;
+      page-break-before: auto;
+  }
+
+
+ /* Force a page break before the table */
+  .page-break-before {
+    page-break-before: auto !important;
+  }
+  .page-break-after {
+    page-break-after: auto !important;
+  }
+
+  /* Ensure main container (background image) does not add extra margins */
+  .main {
+    background-image: url("{% static 'sign.jpg' %}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 90px; /* Adjust the height for print */
+    width: 100%; /* Adjust the width of the container as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 !important; /* Remove margin for printing */
+  }
+}
     </style>
   </head>
   <body>
@@ -267,7 +315,7 @@
         </div>
 
         <div
-          class="my-3 "
+          class="my-3 page-break-after"
           style="border: 1px solid black;"
         >
           <!-- Table -->
@@ -350,7 +398,7 @@
         </div>
 
         <div
-          class="my-3"
+          class="my-3 page-break-before"
           style="border: 1px solid black; "
         >
           <!-- Additional Table -->
@@ -452,11 +500,11 @@
         </div>
 
         <div
-          class=""
+          class="page-break-after"
           style="border: 1px solid black; "
         >
           <!-- Additional Table -->
-          <div class="row page-break-before">
+          <div class="row ">
             <div class="col-md-12">
               <table class="table table-hover" >
                 <thead>
@@ -593,8 +641,11 @@
             </div>
           </div>
         </div>
-        <br />
+
       </form>
+        <div class="text-center print-btn">
+        <button class=" btn btn-login w-25 my-3" onclick="window.print()">Print</button>
+    </div>
     </div>
 
     {% include 'main/footer.html' %}
