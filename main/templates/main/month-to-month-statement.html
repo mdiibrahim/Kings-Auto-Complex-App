@@ -91,6 +91,47 @@ tr td {
 }
 
 
+/* Adjust layout for printing */
+@media print {
+  /* Remove the background image when printing */
+  body {
+    background-color: white !important;
+    background-image: none !important;
+    margin: 0 !important; /* Remove margins */
+    padding: 0 !important; /* Remove padding */
+    width: 100% !important;
+  }
+
+  /* Ensure container is properly centered and stretches correctly */
+  .container {
+    margin: 0 !important; /* Remove all margins */
+    padding: 15px !important; /* Remove all padding */
+    top: 0;
+    position: relative;
+    max-width: 100% !important;
+
+
+  }
+
+  /* Hide the print button */
+  .print-btn, .navbar-wrapper {
+    display: none !important; /* Hide the print button */
+  }
+
+
+  /* Ensure footer takes full width and sticks at the bottom of the last page */
+  footer {
+    width: 100% !important;
+    padding: 15px !important;
+    margin: 0 !important;
+    position: relative; /* Make sure it's positioned relative to the page */
+    bottom: 0;
+  page-break-before: auto !important;
+font-size: small;
+  }
+
+
+}
 
 
     </style>
@@ -138,6 +179,9 @@ tr td {
         </tr>
       </tbody>
     </table>
+      <div class="text-center print-btn">
+        <button class=" btn btn-login w-25 my-3" onclick="window.print()">Print Statement</button>
+    </div>
   </div>
 
   {% include 'main/footer.html' %}

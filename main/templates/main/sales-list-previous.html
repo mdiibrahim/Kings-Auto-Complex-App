@@ -145,13 +145,61 @@
       }
 
 
+/* Adjust layout for printing */
+@media print {
+  /* Remove the background image when printing */
+  body {
+    background-color: white !important;
+    background-image: none !important;
+    margin: 0 !important; /* Remove margins */
+    padding: 0 !important; /* Remove padding */
+    width: 100% !important;
+  }
 
+  /* Ensure container is properly centered and stretches correctly */
+  .container {
+    margin: 0 !important; /* Remove all margins */
+    padding: 15px !important; /* Remove all padding */
+    top: 0;
+    position: relative;
+    max-width: 100% !important;
+
+
+  }
+
+  /* Hide the print button */
+  .form-container, .navbar-wrapper {
+    display: none !important; /* Hide the print button */
+  }
+
+
+
+  /* Ensure footer takes full width and sticks at the bottom of the last page */
+  footer {
+    width: 100% !important;
+    padding: 15px !important;
+    margin: 0 !important;
+    position: relative; /* Make sure it's positioned relative to the page */
+    bottom: 0;
+  page-break-before: auto !important;
+  font-size: small;
+
+  }
+ /* Force a page break before the table */
+  .page-break-before {
+    page-break-before: auto !important;
+  }
+  .page-break-after {
+    page-break-after: auto !important;
+  }
+
+}
     </style>
   </head>
 
   <body>
     {% include 'main/navbar.html' %}
-    <br />
+
     <div class="form-container">
       <form method="POST" action="{% url 'sales_list_previous' %}">
         {% csrf_token %}
@@ -187,7 +235,7 @@
       </form>
     </div>
 
-    <br />
+
     <div class="container">
       <div class="print-dates text-center">
         <strong>Date Range: {{ start_date }} - {{ end_date }}</strong>
@@ -279,6 +327,10 @@
         <a href="?page={{ sales.next_page_number }}">Next</a>
         {% endif %}
       </div>
+
+        <div class="text-center print-btn">
+        <button class=" btn btn-login w-25 my-3" onclick="window.print()">Print</button>
+    </div>
     </div>
  <!-- Delete Confirmation Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
