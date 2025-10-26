@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>View Jobcard</title>
+      <!-- Link to the Favicon -->
+    <link rel="icon" href="{% static '/favicon.ico' %}" type="image/x-icon">
     <!-- Include Bootstrap 5 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"/>
 
@@ -88,7 +91,7 @@
   }
 
   /* Hide the print button */
-  .btn-login, .navbar-wrapper {
+  .print-btn, .navbar-wrapper {
     display: none !important; /* Hide the print button */
   }
 
@@ -105,10 +108,12 @@
   }
 
 
-
-  /* Force a page break before specific sections */
+ /* Force a page break before the table */
   .page-break-before {
-    page-break-before: auto !important; /* Forces a page break before this element */
+    page-break-before: auto !important;
+  }
+  .page-break-after {
+    page-break-after: auto !important;
   }
 
   /* Ensure main container (background image) does not add extra margins */
@@ -324,7 +329,7 @@
         </div>
 
         <div
-                class="my-3 "
+                class="my-3 page-break-after"
                 style="border: 1px solid black; "
         >
             <!-- Table -->
@@ -410,7 +415,7 @@
                 style="border: 1px solid black;"
         >
             <!-- Additional Table -->
-            <div class="row ">
+            <div class="row page-break-before">
                 <div class="col-md-12">
                     <table class="table table-hover">
                         <thead>
@@ -502,7 +507,7 @@
                 style="border: 1px solid black; "
         >
             <!-- Additional Table -->
-            <div class="row  page-break-before">
+            <div class="row  page-break-after">
                 <div class="col-md-12">
                     <table class="table table-hover">
                         <thead>
@@ -633,7 +638,7 @@
         </div>
         <br/>
     </form>
-    <div class="text-center ">
+    <div class="text-center print-btn">
         <button class=" btn btn-login w-25 " onclick="window.print()">Print</button>
     </div>
 </div>
