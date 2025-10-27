@@ -1,211 +1,213 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Login - King's Auto Complex</title>
+    <!-- Link to the Favicon -->
+    <link rel="icon" href="{% static '/favicon.ico' %}" type="image/x-icon">
 
     <!-- Latest Bootstrap 5 CDN -->
     <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-      integrity="sha384-KyZXEJ+1tYcu8XcXl7F2BpmL8+LBexZYo+QkxsL72Xo0Wq5jf+chWqf7D9Lrx5c4"
-      crossorigin="anonymous"
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+            integrity="sha384-KyZXEJ+1tYcu8XcXl7F2BpmL8+LBexZYo+QkxsL72Xo0Wq5jf+chWqf7D9Lrx5c4"
+            crossorigin="anonymous"
     />
 
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 
     <!-- Internal Styles -->
     <style>
-      /* styles.css */
-      :root {
-        --primary-color: #eab11a;
-        --secondary-color: #f9d448;
-        --third-color: #f2f2f2;
-        --background-color: #000000;
-      }
-
-      /* Background Styling */
-      body {
-        font-family: 'Montserrat', sans-serif;
-        background: linear-gradient(
-            rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.5)
-          ),
-          url('{% static "logo1.jpg" %}') center/cover no-repeat;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        margin: 0;
-      }
-
-      /* Title Styling */
-      .title {
-        font-size: 2.5rem;
-        color: var(--primary-color);
-        font-weight: 700;
-        margin-bottom: 20px;
-        animation: fadeIn 2s ease-in-out;
-      }
-
-      /* Tagline Styling */
-      .tagline {
-        font-size: 1.2rem;
-        color: var(--third-color);
-        text-align: center;
-        margin-bottom: 40px;
-        animation: fadeIn 2.5s ease-in-out;
-      }
-
-      /* Card Styling */
-      .card {
-        width: 75%;
-        max-width: 450px;
-        background-color: rgba(30, 30, 30, 0.9);
-        border-radius: 10px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
-        padding: 60px;
-        color: #fff;
-        animation: slideIn 1s ease-out;
-        background-image: url('{% static "car_image.jpg" %}');
-        background-size: cover;
-        background-position: center;
-      }
-
-      /* Input Fields Styling */
-      .form-control {
-        width: 50%;
-        display: flex;
-        align-items: center;
-        border-radius: 30px;
-        padding: 10px 15px; /* Reduced padding for a smaller field */
-        background-color: #fff;
-        border: 1px solid #ddd;
-        color: #333;
-        font-size: 1rem;
-      }
-
-      .input-group {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px; /* Space between input fields */
-        justify-content: center;
-      }
-
-      /* Input Icons Styling */
-      .input-group-text {
-        background-color: var(--primary-color);
-        color: #fff;
-        border-radius: 30%;
-        padding: 10px;
-        font-size: 1.2rem;
-        margin: 10px;
-      }
-
-      /* Submit Button Styling */
-      .login_btn {
-        width: 75%;
-        max-width: 300px; /* Adjust the button size to 75% of the form */
-        background-color: var(--primary-color);
-        color: #000;
-        font-weight: 600;
-        border-radius: 50px;
-        padding: 15px;
-        transition: background-color 0.3s, transform 0.3s ease;
-        margin: 0 auto; /* Center the button */
-        display: flex;
-        justify-content: center;
-      }
-
-      .login_btn:hover {
-        background-color: var(--secondary-color);
-
-        transform: scale(1.05);
-      }
-
-      /* Animations */
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
+        /* styles.css */
+        :root {
+          --primary-color: #eab11a;
+          --secondary-color: #f9d448;
+          --third-color: #f2f2f2;
+          --background-color: #000000;
         }
-        to {
-          opacity: 1;
-        }
-      }
 
-      @keyframes slideIn {
-        from {
-          transform: translateY(30px);
-          opacity: 0;
+        /* Background Styling */
+        body {
+          font-family: 'Montserrat', sans-serif;
+          background: linear-gradient(
+              rgba(0, 0, 0, 0.5),
+              rgba(0, 0, 0, 0.5)
+            ),
+            url('{% static "logo1.jpg" %}') center/cover no-repeat;
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          margin: 0;
         }
-        to {
-          transform: translateY(0);
-          opacity: 1;
+
+        /* Title Styling */
+        .title {
+          font-size: 2.5rem;
+          color: var(--primary-color);
+          font-weight: 700;
+          margin-bottom: 20px;
+          animation: fadeIn 2s ease-in-out;
         }
-      }
+
+        /* Tagline Styling */
+        .tagline {
+          font-size: 1.2rem;
+          color: var(--third-color);
+          text-align: center;
+          margin-bottom: 40px;
+          animation: fadeIn 2.5s ease-in-out;
+        }
+
+        /* Card Styling */
+        .card {
+          width: 75%;
+          max-width: 450px;
+          background-color: rgba(30, 30, 30, 0.9);
+          border-radius: 10px;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+          padding: 60px;
+          color: #fff;
+          animation: slideIn 1s ease-out;
+          background-image: url('{% static "car_image.jpg" %}');
+          background-size: cover;
+          background-position: center;
+        }
+
+        /* Input Fields Styling */
+        .form-control {
+          width: 50%;
+          display: flex;
+          align-items: center;
+          border-radius: 30px;
+          padding: 10px 15px; /* Reduced padding for a smaller field */
+          background-color: #fff;
+          border: 1px solid #ddd;
+          color: #333;
+          font-size: 1rem;
+        }
+
+        .input-group {
+          display: flex;
+          align-items: center;
+          margin-bottom: 20px; /* Space between input fields */
+          justify-content: center;
+        }
+
+        /* Input Icons Styling */
+        .input-group-text {
+          background-color: var(--primary-color);
+          color: #fff;
+          border-radius: 30%;
+          padding: 10px;
+          font-size: 1.2rem;
+          margin: 10px;
+        }
+
+        /* Submit Button Styling */
+        .login_btn {
+          width: 75%;
+          max-width: 300px; /* Adjust the button size to 75% of the form */
+          background-color: var(--primary-color);
+          color: #000;
+          font-weight: 600;
+          border-radius: 50px;
+          padding: 15px;
+          transition: background-color 0.3s, transform 0.3s ease;
+          margin: 0 auto; /* Center the button */
+          display: flex;
+          justify-content: center;
+        }
+
+        .login_btn:hover {
+          background-color: var(--secondary-color);
+
+          transform: scale(1.05);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes slideIn {
+          from {
+            transform: translateY(30px);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
     </style>
-  </head>
+</head>
 
-  <body>
-    <div class="title">Welcome to King's Auto Complex</div>
-    <div class="tagline">Your Trusted Automotive Service Center</div>
+<body>
+<div class="title">Welcome to King's Auto Complex</div>
+<div class="tagline">Your Trusted Automotive Service Center</div>
 
-    <div class="card">
-      <div class="card-body">
+<div class="card">
+    <div class="card-body">
         <form id="dynamic-form" action="{% url 'check_login' %}" method="POST">
-          {% csrf_token %}
+            {% csrf_token %}
 
-          <!-- Username Field -->
-          <div class="mb-4">
-            <div class="input-group">
-              <span class="input-group-text"><i class="bi bi-person-circle"></i></span>
-              <input
-                name="username"
-                type="text"
-                class="form-control"
-                placeholder="Enter Your Username"
-                required
-              />
+            <!-- Username Field -->
+            <div class="mb-4">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person-circle"></i></span>
+                    <input
+                            name="username"
+                            type="text"
+                            class="form-control"
+                            placeholder="Enter Your Username"
+                            required
+                    />
+                </div>
             </div>
-          </div>
 
-          <!-- Password Field -->
-          <div class="mb-4">
-            <div class="input-group">
-              <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
-              <input
-                name="password"
-                type="password"
-                class="form-control"
-                placeholder="Enter Your Password"
-                required
-              />
+            <!-- Password Field -->
+            <div class="mb-4">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
+                    <input
+                            name="password"
+                            type="password"
+                            class="form-control"
+                            placeholder="Enter Your Password"
+                            required
+                    />
+                </div>
             </div>
-          </div>
 
-          <!-- Submit Button -->
-          <div class="form-group mb-3">
-            <input type="submit" value="Login" class="btn login_btn" />
-          </div>
+            <!-- Submit Button -->
+            <div class="form-group mb-3">
+                <input type="submit" value="Login" class="btn login_btn"/>
+            </div>
         </form>
-      </div>
     </div>
+</div>
 
-    <!-- Bootstrap 5 JS and Popper -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-      integrity="sha384-oBqDVmMz4fnFO9gybCkPsy8V8ZftF+5M/z6Lqa2jE55Aua8iXH82V4f6JzFgV+ZA"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
-      integrity="sha384-pzjw8f+ua7Kw1TIq0XfyLoA8DfuBzgo9zYQxkqA2rrl4N3zZaFfG7fM29vbgfUAn"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+<!-- Bootstrap 5 JS and Popper -->
+<script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz4fnFO9gybCkPsy8V8ZftF+5M/z6Lqa2jE55Aua8iXH82V4f6JzFgV+ZA"
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+        integrity="sha384-pzjw8f+ua7Kw1TIq0XfyLoA8DfuBzgo9zYQxkqA2rrl4N3zZaFfG7fM29vbgfUAn"
+        crossorigin="anonymous"
+></script>
+</body>
 </html>
