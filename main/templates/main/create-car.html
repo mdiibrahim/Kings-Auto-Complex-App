@@ -59,7 +59,7 @@
 <body>
 {% include 'main/navbar.html' %}
 <div class=" container">
-    <h3 class="text-center">Add Car</h3>
+    <h3 class="text-center mb-3">Add Car</h3>
     <form action="{% url 'create_car' %}" method="POST">
         {% csrf_token %}
         <div class="row item-row ">
@@ -104,7 +104,7 @@
                 </div>
             </div>
 
-        </div>
+
     </form>
 </div>
 {% include 'main/footer.html' %}
