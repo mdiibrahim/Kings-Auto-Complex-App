@@ -27,7 +27,7 @@
 
         /* Container for the main content */
         .container {
-          background-color: rgba(255, 255, 255, 0.8); /* Make background a little transparent */
+          background-color: rgba(255, 255, 255, 0.9); /* Make background a little transparent */
           padding: 60px;
           border-radius: 10px;
           margin-top: 100px; /* Add some top margin */
@@ -56,7 +56,7 @@
 .sale{
         position: sticky;
         top: 0;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
         z-index: 1;
         padding: 5px;
 
@@ -68,7 +68,7 @@
 <body>
 {% include 'main/navbar.html' %}
 <br/>
-<div class=" container" >
+<div class=" container my-5" >
     <div class="mb-3">
         <h2 class="text-center ">Sales</h2>
     </div>
@@ -97,7 +97,7 @@
                             type="button"
                             id="add-btn"
                             name="add-btn"
-                            class="btn btn-outline-success"
+                            class="btn btn-success"
                             onclick="addRow()"
                     >
                         Add Row
@@ -597,7 +597,7 @@ document.getElementById("confirmSubmitBtn").addEventListener("click", function (
       newRow.innerHTML = `
 
        <!-- Dynamic Row with Input Fields -->
-<div class="form-row d-flex align-items-center">
+<div class="form-row d-flex align-items-center mt-2">
     <!-- SL No. Input -->
     <div class="col-.5 text-center">
         <input
